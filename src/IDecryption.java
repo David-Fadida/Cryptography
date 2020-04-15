@@ -1,5 +1,6 @@
 public interface IDecryption {
 
-    void decrypt(byte[] cipherText, byte[] key);
+    byte[] decrypt(byte[] cipherText);
 
+    void setKeys(byte[][] keys);
 }
