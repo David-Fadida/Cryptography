@@ -40,6 +40,20 @@ public class AES3 extends AEncryption {
      */
     @Override
     public byte[] encrypt(byte[] plainText) {
+        byte[][] blocks = getBlocks(plainText);
+        for (int i = 0; i < blocks.length; i++) {
+            blocks[i] = encryptBlock(blocks[i]);
+        }
+        return combine(blocks);
+    }
+
+    /**
+     * Encrypt byte[] by Encryption.AES3
+     *
+     * @param plainText - byte[] input
+     * @return cipherText
+     */
+    private byte[] encryptBlock(byte[] plainText) {
         return encryptors[2].encrypt(encryptors[1].encrypt(encryptors[0].encrypt(plainText)));
     }
 
@@ -51,6 +65,20 @@ public class AES3 extends AEncryption {
      */
     @Override
     public byte[] decrypt(byte[] cipherText) {
+        byte[][] blocks = getBlocks(cipherText);
+        for (int i = 0; i < blocks.length; i++) {
+            blocks[i] = decryptBlock(blocks[i]);
+        }
+        return combine(blocks);
+    }
+
+    /**
+     * Decrypt byte[] by Encryption.AES3
+     *
+     * @param cipherText - byte[] input
+     * @return plainText
+     */
+    private byte[] decryptBlock(byte[] cipherText) {
         return encryptors[0].decrypt(encryptors[1].decrypt(encryptors[2].decrypt(cipherText)));
     }
 
@@ -70,4 +98,39 @@ public class AES3 extends AEncryption {
         encryptors[2].setKeys(keys[2]);
     }
 
+    /**
+     * Split into blocks
+     *
+     * @param input - input bytes
+     * @return byte[][] blocks array
+     */
+    private byte[][] getBlocks(byte[] input) {
+        if (input == null)
+            return null;
+        byte[][] blocks = new byte[input.length / 16][];
+        for (int i = 0; i < blocks.length; i++)
+            blocks[i] = new byte[16];
+        int keyIndex;
+        for (int i = 0; i < input.length; i++) {
+            keyIndex = i / 16;
+            blocks[keyIndex][i % 16] = input[i];
+        }
+        return blocks;
+    }
+
+    /**
+     * Combine function
+     *
+     * @param input - 2D byte array
+     * @return byte[] output -> 1D byte array
+     */
+    private byte[] combine(byte[][] input) {
+        byte[] output = new byte[input.length * input[0].length];
+        int index;
+        for (int i = 0; i < output.length; i++) {
+            index = i / 16;
+            output[i] = input[index][i % 16];
+        }
+        return output;
+    }
 }
