@@ -10,6 +10,6 @@ All 3 keys extraction from only one pair of <plain text, cipher text>
 -d to decrypt
 -b to break the algorithm
 
--e/-d -k <path to key> -i <path to input> -o <path to output>
--b -m <path to message> -c <path to cipher> -o <path to output>
+-e/-d -k path_to_key -i path_to_input -o path_to_output
+-b -m path_to_message -c path_to_cipher -o path_to_output
 
