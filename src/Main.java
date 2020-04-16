@@ -14,6 +14,10 @@ public class Main {
      * @param args - command flags
      */
     public static void main(String[] args) {
+        if (args.length != 7) {
+            System.out.println("ERROR : Missing Parameters");
+            return;
+        }
         switch (args[0]) {
             case "-e":
                 if (args[1].equals("-k")) {
