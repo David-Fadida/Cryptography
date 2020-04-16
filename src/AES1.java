@@ -18,7 +18,7 @@ public class AES1 extends AEncryption {
     }
 
     /**
-     * Encrypt byte[] by AES
+     * Encrypt byte[] by AES1
      * @param plainText - byte[] input
      * @return cipherText
      */
@@ -28,7 +28,7 @@ public class AES1 extends AEncryption {
     }
 
     /**
-     * Decrypt byte[] by AES
+     * Decrypt byte[] by AES1
      * @param cipherText - byte[] input
      * @return plainText
      */
@@ -42,7 +42,7 @@ public class AES1 extends AEncryption {
      * @param keys - byte[][] set of keys
      */
     @Override
-    public void setKeys(byte[][] keys) {
+    public void setKeys(byte[]... keys) {
         this.key = keys[0];
     }
 

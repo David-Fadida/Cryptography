@@ -2,5 +2,5 @@ public interface IEncryption {
 
     byte[] encrypt(byte[] plainText);
 
-    void setKeys(byte[][] keys);
+    void setKeys(byte[]... keys);
 }
