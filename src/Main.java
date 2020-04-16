@@ -14,34 +14,66 @@ public class Main {
      * @param args - command flags
      */
     public static void main(String[] args) {
-        String messagePath = "D:/testFiles/message_long";
-        String keysPath = "D:/testFiles/key_long";
-        String cipherPath = "D:/testFiles/cipher_long";
-        byte[] testCipher = encrypt(Paths.get(messagePath), Paths.get(keysPath));
-        byte[] testMessage = decrypt(Paths.get(cipherPath), Paths.get(keysPath));
-        byte[] actualCipher = readFromFile(Paths.get(cipherPath));
-        byte[] actualMessage = readFromFile(Paths.get(messagePath));
-        for (int i = 0; i < testCipher.length; i++) {
-            if (actualCipher != null && actualCipher[i] != testCipher[i]) {
-                System.out.println("Encryption error!");
-                return;
-            }
+        switch (args[0]) {
+            case "-e":
+                if (args[1].equals("-k")) {
+                    String keys = args[2];
+                    if (args[3].equals("-i")) {
+                        String input = args[4];
+                        if (args[5].equals("-o")) {
+                            String output = args[6];
+                            writeToFile(Paths.get(output), encrypt(Paths.get(input), Paths.get(keys)));
+                        } else {
+                            System.out.println("ERROR : Wrong Flags Or Parameters");
+                        }
+                    } else {
+                        System.out.println("ERROR : Wrong Flags Or Parameters");
+                    }
+                } else {
+                    System.out.println("ERROR : Wrong Flags Or Parameters");
+                }
+                break;
+            case "-d":
+                if (args[1].equals("-k")) {
+                    String keys = args[2];
+                    if (args[3].equals("-i")) {
+                        String input = args[4];
+                        if (args[5].equals("-o")) {
+                            String output = args[6];
+                            writeToFile(Paths.get(output), decrypt(Paths.get(input), Paths.get(keys)));
+                        } else {
+                            System.out.println("ERROR : Wrong Flags Or Parameters");
+                        }
+                    } else {
+                        System.out.println("ERROR : Wrong Flags Or Parameters");
+                    }
+                } else {
+                    System.out.println("ERROR : Wrong Flags Or Parameters");
+                }
+                break;
+            case "-b":
+                if (args[1].equals("-m")) {
+                    String message = args[2];
+                    if (args[3].equals("-c")) {
+                        String cipher = args[4];
+                        if (args[5].equals("-o")) {
+                            String output = args[6];
+                            writeToFile(Paths.get(output), combine(exploit(Paths.get(message), Paths.get(cipher))));
+                        } else {
+                            System.out.println("ERROR : Wrong Flags Or Parameters");
+                        }
+                    } else {
+                        System.out.println("ERROR : Wrong Flags Or Parameters");
+                    }
+                } else {
+                    System.out.println("ERROR : Wrong Flags Or Parameters");
+                }
+                break;
+            default:
+                System.out.println("ERROR : Wrong Flags Or Parameters");
+                break;
         }
-        System.out.println("Encryption done successfully!");
-        writeToFile(Paths.get("D:/testFiles/myEncryption"), testCipher);
-        for (int i = 0; i < testMessage.length; i++) {
-            if (actualMessage != null && actualMessage[i] != testMessage[i]) {
-                System.out.println("Decryption error!");
-                return;
-            }
-        }
-        System.out.println("Decryption done successfully!");
-        writeToFile(Paths.get("D:/testFiles/myDecryption"), testMessage);
-        byte[][] testKeys = exploit(Paths.get(messagePath), Paths.get(cipherPath));
-        byte[] testExploitation = combine(testKeys);
-        writeToFile(Paths.get("D:/testFiles/myKeys"), testExploitation);
     }
-
 
     /**
      * Encrypt function using AES3
