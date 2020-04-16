@@ -1,3 +1,5 @@
+package Encryption;
+
 public class AES1 extends AEncryption {
     /**
      * KEY
@@ -12,16 +14,7 @@ public class AES1 extends AEncryption {
     }
 
     /**
-     * Constructor
-     *
-     * @param key - byte[] key
-     */
-    public AES1(byte[] key) {
-        this.key = key;
-    }
-
-    /**
-     * Encrypt byte[] by AES1
+     * Encrypt byte[] by Encryption.AES1
      *
      * @param plainText - byte[] input
      * @return cipherText
@@ -32,7 +25,7 @@ public class AES1 extends AEncryption {
     }
 
     /**
-     * Decrypt byte[] by AES1
+     * Decrypt byte[] by Encryption.AES1
      *
      * @param cipherText - byte[] input
      * @return plainText

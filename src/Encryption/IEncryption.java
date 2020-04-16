@@ -1,3 +1,5 @@
+package Encryption;
+
 public interface IEncryption {
 
     byte[] encrypt(byte[] plainText);

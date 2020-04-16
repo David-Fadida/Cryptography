@@ -1,37 +1,39 @@
+package Encryption;
+
 public class AES3 extends AEncryption {
     /**
      * Encryption Components
      */
-    AEncryption encryptors[] = new AEncryption[3];
+    AEncryption[] encryptors = new AEncryption[3];
 
     /**
      * Constructor
      */
     public AES3() {
-        for (AEncryption encryption : encryptors) {
-            encryption = new AES1();
-        }
+        encryptors[0] = new AES1();
+        encryptors[1] = new AES1();
+        encryptors[2] = new AES1();
     }
 
     /**
      * Constructor
      *
-     * @param encryptors - AEncryption[] of AES1
+     * @param encryptors - Encryption.AEncryption[] of Encryption.AES1
      */
     public AES3(AEncryption[] encryptors) {
         if (encryptors.length != 3) {
             encryptors[0] = new AES1();
             encryptors[1] = new AES1();
             encryptors[2] = new AES1();
-            System.out.println("AES3 constructor error - wrong input");
-            System.out.println("AES3 constructor performed default constructor");
+            System.out.println("Encryption.AES3 constructor error - wrong input");
+            System.out.println("Encryption.AES3 constructor performed default constructor");
         } else {
             this.encryptors = encryptors;
         }
     }
 
     /**
-     * Encrypt byte[] by AES3
+     * Encrypt byte[] by Encryption.AES3
      *
      * @param plainText - byte[] input
      * @return cipherText
@@ -42,7 +44,7 @@ public class AES3 extends AEncryption {
     }
 
     /**
-     * Decrypt byte[] by AES3
+     * Decrypt byte[] by Encryption.AES3
      *
      * @param cipherText - byte[] input
      * @return plainText
@@ -60,7 +62,7 @@ public class AES3 extends AEncryption {
     @Override
     public void setKeys(byte[]... keys) {
         if (keys.length != 3) {
-            System.out.println("Wrong input - AES3 must have 3 keys");
+            System.out.println("Wrong input - Encryption.AES3 must have 3 keys");
             return;
         }
         encryptors[0].setKeys(keys[0]);
