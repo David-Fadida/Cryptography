@@ -1,5 +1,7 @@
 public class AES1 extends AEncryption {
-    /** KEY */
+    /**
+     * KEY
+     */
     private byte[] key;
 
     /**
@@ -11,6 +13,7 @@ public class AES1 extends AEncryption {
 
     /**
      * Constructor
+     *
      * @param key - byte[] key
      */
     public AES1(byte[] key) {
@@ -19,6 +22,7 @@ public class AES1 extends AEncryption {
 
     /**
      * Encrypt byte[] by AES1
+     *
      * @param plainText - byte[] input
      * @return cipherText
      */
@@ -29,6 +33,7 @@ public class AES1 extends AEncryption {
 
     /**
      * Decrypt byte[] by AES1
+     *
      * @param cipherText - byte[] input
      * @return plainText
      */
@@ -39,6 +44,7 @@ public class AES1 extends AEncryption {
 
     /**
      * Set encryption key
+     *
      * @param keys - byte[][] set of keys
      */
     @Override
@@ -48,10 +54,11 @@ public class AES1 extends AEncryption {
 
     /**
      * Operation shift columns
+     *
      * @param input - byte[] input
      * @return shifted input
      */
-    private static byte[] shiftColumns(byte[] input){
+    private static byte[] shiftColumns(byte[] input) {
         byte[] output = new byte[16];
         for (int i = 0; i < 16; i++) {
             output[shift(i)] = input[i];
@@ -61,26 +68,28 @@ public class AES1 extends AEncryption {
 
     /**
      * Operation shift
+     *
      * @param i - int index
      * @return new index
      */
     private static int shift(int i) {
-        int times = i/4;
-        int place = (i-times)%4;
-        return place+times*4;
+        int times = i / 4;
+        int place = (i - times) % 4;
+        return place + times * 4;
     }
 
     /**
      * Operation add round key
+     *
      * @param input - byte[] input
-     * @param key - byte[] key
+     * @param key   - byte[] key
      * @return input XOR key
      */
     private byte[] addRoundKey(byte[] input, byte[] key) {
         byte[] output = new byte[16];
         int i = 0;
-        for (byte b : input){
-            output[i] = (byte)(b^key[i]);
+        for (byte b : input) {
+            output[i] = (byte) (b ^ key[i]);
             i++;
         }
         return output;
@@ -88,10 +97,11 @@ public class AES1 extends AEncryption {
 
     /**
      * Operation re-shift columns
+     *
      * @param input - byte[] input
      * @return re-shifted input
      */
-    private static byte[] reShiftColumns(byte[] input){
+    private static byte[] reShiftColumns(byte[] input) {
         byte[] output = new byte[16];
         for (int i = 0; i < 16; i++) {
             output[reShift(i)] = input[i];
@@ -101,12 +111,13 @@ public class AES1 extends AEncryption {
 
     /**
      * Operation re-shift
+     *
      * @param i - int index
      * @return new index
      */
     private static int reShift(int i) {
-        int times = i/4;
-        int place = (i+times)%4;
-        return place+times*4;
+        int times = i / 4;
+        int place = (i + times) % 4;
+        return place + times * 4;
     }
 }

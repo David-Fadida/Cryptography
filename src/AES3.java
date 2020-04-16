@@ -1,35 +1,38 @@
-public class AES3 extends AEncryption{
-    /** Encryption Components */
+public class AES3 extends AEncryption {
+    /**
+     * Encryption Components
+     */
     AEncryption encryptors[] = new AEncryption[3];
 
     /**
      * Constructor
      */
     public AES3() {
-        for (AEncryption encryption: encryptors) {
+        for (AEncryption encryption : encryptors) {
             encryption = new AES1();
         }
     }
 
     /**
      * Constructor
+     *
      * @param encryptors - AEncryption[] of AES1
      */
     public AES3(AEncryption[] encryptors) {
-        if (encryptors.length != 3){
-            for (AEncryption encryption: encryptors) {
-                encryption = new AES1();
-            }
+        if (encryptors.length != 3) {
+            encryptors[0] = new AES1();
+            encryptors[1] = new AES1();
+            encryptors[2] = new AES1();
             System.out.println("AES3 constructor error - wrong input");
             System.out.println("AES3 constructor performed default constructor");
-        }
-        else{
+        } else {
             this.encryptors = encryptors;
         }
     }
 
     /**
      * Encrypt byte[] by AES3
+     *
      * @param plainText - byte[] input
      * @return cipherText
      */
@@ -40,6 +43,7 @@ public class AES3 extends AEncryption{
 
     /**
      * Decrypt byte[] by AES3
+     *
      * @param cipherText - byte[] input
      * @return plainText
      */
@@ -50,11 +54,12 @@ public class AES3 extends AEncryption{
 
     /**
      * Set encryption key
+     *
      * @param keys - byte[][] set of keys
      */
     @Override
     public void setKeys(byte[]... keys) {
-        if(keys.length != 3) {
+        if (keys.length != 3) {
             System.out.println("Wrong input - AES3 must have 3 keys");
             return;
         }
